@@ -11,12 +11,11 @@ const Login = () => {
 
   const handleChange = (e) => {
     const target = e.target;
-    
     const name = target.name;
 
     setTodo((old) => ({
       ...old,
-      [name]: target.value,
+      [name]: target.value
     }));
 
     const expresiones = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;

@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import Cuidador from "../components/Cuidador";
 
 const Cuidadores = () => {
-  const [data, SetData] = useState([]);
+  const [data, setData] = useState([]);
   const [error, SetError] = useState("");
-  const [search, setSearch] = useState({});
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     (async function f() {
       try {
         const response = await fetch(`https://dummyjson.com/users`);
         const res = await response.json();
-        SetData(res.users);
+        setData(res.users);
       } catch (error) {
         SetError("Error de servidor");
       }
@@ -21,8 +21,22 @@ const Cuidadores = () => {
   if (error !== "") return <h2>{error}</h2>;
 
   const handleChange = (e) => {
-    setSearch({ value: e.target.value });
-  }
+    const expReg = /^[a-zA-Z]+$/;
+
+    if (e.target.value !== "") {
+      expReg.test(e.target.value)
+        ? setSearch(e.target.value)
+        : alert("ingrese solo letras");
+    }
+  };
+
+  const resultados = !search
+    ? data
+    : data.filter(
+        (item) =>
+          item.firstName.toLowerCase().includes(search.toLowerCase()) ||
+          item.lastName.toLowerCase().includes(search.toLowerCase())
+      );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,12 +66,8 @@ const Cuidadores = () => {
         </div>
       </div>
 
-      <div>
-        
-      </div>
-
       <div className="row">
-        {data.map((i) => (
+        {resultados.map((i) => (
           <Cuidador key={i.id} cuidador={i} />
         ))}
       </div>

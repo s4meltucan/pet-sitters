@@ -3,6 +3,50 @@ import React, { useRef } from "react";
 const Registro = () => {
   const formulario = useRef(null);
 
+
+  const handleChange = (e) => {
+
+    const expresiones = {
+      nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
+      password: /^.{4,12}$/, // 4 a 12 digitos.
+      correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+      telefono: /^\d{7,14}$/, // 7 a 14 numeros.
+      cp: /[0-9]{5}/
+    };
+    const name = e.target.name
+    if (name === "nombre") {
+      expresiones.nombre.test(e.target.value) ?  e.target.className = "form-control is-valid" :  e.target.className = "form-control is-invalid"
+    }
+    if (name === "apellido") {
+      expresiones.nombre.test(e.target.value) ?  e.target.className = "form-control is-valid" :  e.target.className = "form-control is-invalid"
+    }
+    if (name === "direccion") {
+      expresiones.nombre.test(e.target.value) ?  e.target.className = "form-control is-valid" :  e.target.className = "form-control is-invalid"
+    }
+    if (name === "ciudad") {
+      expresiones.nombre.test(e.target.value) ?  e.target.className = "form-control is-valid" :  e.target.className = "form-control is-invalid"
+    }
+    if (name === "cp") {
+      expresiones.cp.test(e.target.value) ?  e.target.className = "form-control is-valid" :  e.target.className = "form-control is-invalid"
+    }
+    if (name === "noCasa") {
+      expresiones.cp.test(e.target.value) ?  e.target.className = "form-control is-valid" :  e.target.className = "form-control is-invalid"
+    }
+    if (name === "telefono") {
+      expresiones.telefono.test(e.target.value) ?  e.target.className = "form-control is-valid" :  e.target.className = "form-control is-invalid"
+    }
+    if (name === "email") {
+      expresiones.correo.test(e.target.value) ?  e.target.className = "form-control is-valid" :  e.target.className = "form-control is-invalid"
+    }
+    if (name === "contraseña") {
+      expresiones.password.test(e.target.value) ?  e.target.className = "form-control is-valid" :  e.target.className = "form-control is-invalid"
+    }
+    if (name === "confContraseña") {
+      expresiones.password.test(e.target.value) ?  e.target.className = "form-control is-valid" :  e.target.className = "form-control is-invalid"
+    }
+
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const datos = new FormData(formulario.current);
@@ -28,15 +72,18 @@ const Registro = () => {
       cp: /[0-9]/,
     };
 
-    if (!nombre.trim()) {
-      alert("el campo nombre esta vacio");
-      e.target[0].focus();
-      return;
-    } else if (!expresiones.nombre.test(nombre)) {
-      alert("ingreso caracteres no validos en nombre");
-      e.target[0].focus();
-      return;
-    }
+    
+      if (!nombre.trim()) {
+        alert("el campo nombre esta vacio");
+        e.target[0].focus();
+        return;
+      } else if (!expresiones.nombre.test(nombre)) {
+        alert("ingreso caracteres no validos en nombre");
+        e.target[0].focus();
+        return;
+      }
+    
+    
 
     if (!apellido.trim()) {
       alert("el campo apellido esta vacio");
@@ -134,6 +181,9 @@ const Registro = () => {
       alert("las contraseñas no coinciden");
       return;
     }
+
+    alert("Registro finalizado con exito")
+
   };
 
   return (
@@ -146,6 +196,7 @@ const Registro = () => {
             type="text"
             className="form-control"
             name="nombre"
+            onChange = {handleChange}
           />
         </div>
         <div className="col-6">
@@ -154,6 +205,7 @@ const Registro = () => {
             type="text"
             className="form-control"
             name="apellido"
+            onChange = {handleChange}
           />
         </div>
         <div className="col-12">
@@ -162,6 +214,7 @@ const Registro = () => {
             type="text"
             className="form-control"
             name="direccion"
+            onChange = {handleChange}
           />
         </div>
         <div className="col-3">
@@ -170,6 +223,7 @@ const Registro = () => {
             type="text"
             className="form-control"
             name="ciudad"
+            onChange = {handleChange}
           />
         </div>
 
@@ -180,6 +234,7 @@ const Registro = () => {
             className="form-control"
             name="cp"
             maxLength="5"
+            onChange = {handleChange}
           />
         </div>
         <div className="col-3">
@@ -188,6 +243,7 @@ const Registro = () => {
             type="text"
             className="form-control"
             name="noCasa"
+            onChange = {handleChange}
           />
         </div>
         <div className="col-3">
@@ -196,6 +252,7 @@ const Registro = () => {
             type="text"
             className="form-control"
             name="telefono"
+            onChange = {handleChange}
           />
         </div>
 
@@ -205,6 +262,7 @@ const Registro = () => {
             type="email"
             className="form-control"
             name="email"
+            onChange = {handleChange}
           />
         </div>
         <div className="col-6">
@@ -213,6 +271,7 @@ const Registro = () => {
             type="password"
             className="form-control"
             name="contraseña"
+            onChange = {handleChange}
           />
         </div>
         <div className="col-6">
@@ -221,6 +280,7 @@ const Registro = () => {
             type="password"
             className="form-control"
             name="confContraseña"
+            onChange = {handleChange}
           />
         </div>
         <button type="submit" className="btn btn-success mt-4">
