@@ -9,7 +9,7 @@ const Cuidadores = () => {
   useEffect(() => {
     (async function f() {
       try {
-        const response = await fetch(`https://dummyjson.com/users`);
+        const response = await fetch('https://dummyjson.com/users/');
         const res = await response.json();
         setData(res.users);
       } catch (error) {
@@ -28,7 +28,7 @@ const Cuidadores = () => {
         ? setSearch(e.target.value)
         : alert("ingrese solo letras");
     }
-  };
+  }; 
 
   const resultados = !search
     ? data
@@ -38,10 +38,6 @@ const Cuidadores = () => {
           item.lastName.toLowerCase().includes(search.toLowerCase())
       );
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <>
       <div className="row">
@@ -49,7 +45,7 @@ const Cuidadores = () => {
           <h1>Cuidadores Disponibles</h1>
         </div>
         <div className="col-6 mt-2">
-          <form className="d-flex" role="search" onSubmit={handleSubmit}>
+          <form className="d-flex" role="search">
             <input
               className="form-control me-2"
               type="search"
@@ -59,9 +55,7 @@ const Cuidadores = () => {
               onChange={handleChange}
               value={search.value}
             />
-            <button className="btn btn-outline-success" type="submit">
-              Buscar
-            </button>
+            
           </form>
         </div>
       </div>

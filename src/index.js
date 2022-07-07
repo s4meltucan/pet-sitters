@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
 import Inicio from './routers/Inicio';
 import Cuidadores from './routers/Cuidadores';
 import Login from './routers/Login';
@@ -17,7 +17,7 @@ root.render(
         <Route path="/" element={<App />}>
           <Route index element={<Inicio/>}/>
           <Route path='cuidadores' element={<Cuidadores />} />
-          <Route path='perfilCuidador' element={<PerfilCuidador />} />
+          <Route path='perfilCuidador/:id' element={<PerfilCuidador />} />
           <Route path='login' element={<Login />} />
           <Route path='registro' element={<Registro />}/>
           <Route path='*' element={<NoEncontrada/>}/>

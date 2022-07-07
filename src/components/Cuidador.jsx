@@ -7,7 +7,7 @@ const Cuidador = ({ cuidador }) => {
   return (
     <div className="card mt-3 me-2 col-2" key={id}>
       <img src={image} alt={`image-${image}`} className="card-img-top" />
-      <Link className="card-body me-2 text-decoration-none" to="/PerfilCuidador">
+      <Link className="card-body me-2 text-decoration-none" to={`/PerfilCuidador/${id}`}>
         <h5>
           {firstName} {lastName}
         </h5>
